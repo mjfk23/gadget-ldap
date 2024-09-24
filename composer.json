@@ -1,0 +1,59 @@
+{
+  "name": "mjfk23/gadget-ldap",
+  "description": "Gadget LDAP library",
+  "type": "library",
+  "keywords": [],
+  "homepage": "https://github.com/mjfk23/gadget-ldap",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Melody Kimball",
+      "role": "lead"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/mjfk23/gadget-ldap/issues",
+    "wiki": "https://github.com/mjfk23/gadget-ldap/wiki",
+    "source": "https://github.com/mjfk23/gadget-ldap"
+  },
+  "require": {
+    "php": ">=8.1",
+    "ext-ldap": "*",
+    "mjfk23/gadget-core": "dev-main"
+  },
+  "require-dev": {
+    "guzzlehttp/guzzle": "^7.9",
+    "guzzlehttp/psr7": "^2.7",
+    "phpstan/phpstan": "^1.12",
+    "phpstan/phpstan-strict-rules": "^1.6",
+    "phpstan/extension-installer": "^1.4",
+    "phpunit/phpunit": "^10.0",
+    "squizlabs/php_codesniffer": "^3.10",
+    "symfony/cache": "^7.1",
+    "vimeo/psalm": "^5.26"
+  },
+  "autoload": {
+    "psr-4": {
+      "Gadget\\LDAP\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Gadget\\LDAP\\Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "phpstan/extension-installer": true
+    },
+    "sort-packages": true,
+    "optimize-autoloader": true,
+    "apcu-autoloader": true
+  },
+  "scripts": {
+    "phpcs": "vendor/bin/phpcs",
+    "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon",
+    "psalm": "vendor/bin/psalm --no-cache",
+    "phpunit": "vendor/bin/phpunit"
+  }
+}
