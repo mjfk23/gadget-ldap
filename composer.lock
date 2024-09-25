@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "68bd1fa6cf7629716ad8cb203673a2c2",
+    "content-hash": "2bb9f33d8133b81c0e2a7d943d20c994",
     "packages": [
         {
             "name": "mjfk23/gadget-core",
-            "version": "dev-main",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mjfk23/gadget-core.git",
-                "reference": "d5543dd8151f3051f665d1ab83a86aeb5991c220"
+                "reference": "779b8649d62d9e881598e548f42635b3bcac3228"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mjfk23/gadget-core/zipball/d5543dd8151f3051f665d1ab83a86aeb5991c220",
-                "reference": "d5543dd8151f3051f665d1ab83a86aeb5991c220",
+                "url": "https://api.github.com/repos/mjfk23/gadget-core/zipball/779b8649d62d9e881598e548f42635b3bcac3228",
+                "reference": "779b8649d62d9e881598e548f42635b3bcac3228",
                 "shasum": ""
             },
             "require": {
@@ -32,7 +32,6 @@
                 "squizlabs/php_codesniffer": "^3.10",
                 "vimeo/psalm": "^5.26"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -60,7 +59,7 @@
                 "source": "https://github.com/mjfk23/gadget-core",
                 "wiki": "https://github.com/mjfk23/gadget-core/wiki"
             },
-            "time": "2024-09-20T17:10:30+00:00"
+            "time": "2024-09-25T12:23:37+00:00"
         }
     ],
     "packages-dev": [
@@ -4709,9 +4708,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "mjfk23/gadget-core": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
