@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Gadget\LDAP;
+namespace Gadget\Ldap;
 
 class Query
 {
@@ -75,6 +75,6 @@ class Query
                 $this->attributes,
                 $result
             )
-            : throw new LDAPException("Search error");
+            : throw new LdapException("Search error");
     }
 }

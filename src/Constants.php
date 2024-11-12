@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Gadget\LDAP;
+namespace Gadget\Ldap;
 
 final class Constants
 {

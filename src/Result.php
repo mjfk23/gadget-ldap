@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Gadget\LDAP;
-
-use Iterator;
+namespace Gadget\Ldap;
 
 /** @implements \IteratorAggregate<int,array<string,mixed>> */
 class Result implements \IteratorAggregate

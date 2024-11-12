@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Gadget\LDAP;
+namespace Gadget\Ldap;
 
 use Gadget\Lang\Exception;
 
-class LDAPException extends Exception
+class LdapException extends Exception
 {
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Gadget\LDAP;
+namespace Gadget\Ldap;
 
 final class DateFormat
 {
@@ -16,7 +16,7 @@ final class DateFormat
         string|null $localTimezone = null
     ): \DateTimeInterface {
         if ($utcTimestamp < 19700101000000 || $utcTimestamp > 20991231235959) {
-            throw new LDAPException("Invalid timestamp");
+            throw new LdapException("Invalid timestamp");
         }
 
         $year = intval(floor($utcTimestamp / 10000000000));
@@ -27,7 +27,7 @@ final class DateFormat
         $second = $utcTimestamp % 100;
 
         if ($month < 1 || $month > 12 || $day < 1 || $day > 31 || $hour > 23 || $minute > 59 || $second > 59) {
-            throw new LDAPException("Invalid timestamp");
+            throw new LdapException("Invalid timestamp");
         }
 
         return static::createLocalDateTime(

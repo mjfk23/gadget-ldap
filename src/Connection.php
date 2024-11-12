@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Gadget\LDAP;
+namespace Gadget\Ldap;
 
 use Gadget\Io\JSON;
 
@@ -97,7 +97,7 @@ class Connection
     {
         foreach ($this->globalOptions as $option => $value) {
             if (ldap_set_option(null, $option, $value) !== true) {
-                throw new LDAPException(["ldap_set_option() failed: %s", JSON::encode([
+                throw new LdapException(["ldap_set_option() failed: %s", JSON::encode([
                     'ldap' => null,
                     'option' => $option,
                     'value' => $value
@@ -107,7 +107,7 @@ class Connection
 
         $conn = ldap_connect($this->uri);
         if (!$conn instanceof \LDAP\Connection) {
-            throw new LDAPException(["ldap_connect() failed: \$uri => : %s", JSON::encode([
+            throw new LdapException(["ldap_connect() failed: \$uri => : %s", JSON::encode([
                 'uri' => $this->uri
             ])]);
         }
@@ -115,7 +115,7 @@ class Connection
         foreach ($this->connectOptions as $option => $value) {
             if (ldap_set_option($conn, $option, $value) !== true) {
                 if (ldap_set_option(null, $option, $value) !== true) {
-                    throw new LDAPException(["ldap_set_option() failed: %s", JSON::encode([
+                    throw new LdapException(["ldap_set_option() failed: %s", JSON::encode([
                         'ldap' => 'resource',
                         'option' => $option,
                         'value' => $value
@@ -125,11 +125,11 @@ class Connection
         }
 
         if ($this->user === '' || $this->pass === '') {
-            throw new LDAPException("Username/password is blank");
+            throw new LdapException("Username/password is blank");
         }
 
         if (ldap_bind($conn, $this->user, $this->pass) === false) {
-            throw new LDAPException(["ldap_bind() failed: %s", JSON::encode([
+            throw new LdapException(["ldap_bind() failed: %s", JSON::encode([
                 'ldap' => 'resource',
                 'user' => $this->user
             ])]);

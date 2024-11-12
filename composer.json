@@ -34,12 +34,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Gadget\\LDAP\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Gadget\\LDAP\\Tests\\": "tests/"
+      "Gadget\\Ldap\\": "src/"
     }
   },
   "config": {
@@ -52,8 +47,6 @@
   },
   "scripts": {
     "phpcs": "vendor/bin/phpcs",
-    "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon",
-    "psalm": "vendor/bin/psalm --no-cache",
-    "phpunit": "vendor/bin/phpunit"
+    "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon"
   }
 }
