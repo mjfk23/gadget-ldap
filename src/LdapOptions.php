@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gadget\Ldap;
 
-final class Constants
+final class LdapOptions
 {
     /**
      * Specifies a bitwise level for debug traces.
@@ -12,7 +12,7 @@ final class Constants
      * @var int
      * @link https://www.php.net/manual/en/ldap.constants.php#constant.ldap-opt-debug-level
      */
-    public const LDAP_OPT_DEBUG_LEVEL = 20481;
+    public const DEBUG_LEVEL = 20481;
 
 
     /**
@@ -21,7 +21,7 @@ final class Constants
      * @var int
      * @link https://www.php.net/manual/en/ldap.constants.php#constant.ldap-opt-protocol-version
      */
-    public const LDAP_OPT_PROTOCOL_VERSION = 17;
+    public const PROTOCOL_VERSION = 17;
 
 
     /**
@@ -30,7 +30,7 @@ final class Constants
      * @var int
      * @link https://www.php.net/manual/en/ldap.constants.php#constant.ldap-opt-referrals
      */
-    public const LDAP_OPT_REFERRALS = 8;
+    public const REFERRALS = 8;
 
 
     /**
@@ -38,7 +38,6 @@ final class Constants
      *
      * @var string
      * @link https://www.php.net/manual/en/ldap.constants.php#constant.ldap-control-pagedresults
-     * @link http://www.faqs.org/rfcs/rfc2696.html
      */
-    public const LDAP_CONTROL_PAGEDRESULTS = '1.2.840.113556.1.4.319';
+    public const CONTROL_PAGEDRESULTS = '1.2.840.113556.1.4.319';
 }

@@ -5,10 +5,6 @@ services:
 
   Gadget\Ldap\:
     resource: "../../../src/"
-    exclude:
-      - "../../../src/DependencyInjection/"
-      - "../../../src/Entity/"
-      - "../../../src/Kernel.php"
 
   Gadget\Ldap\Connection:
     arguments:

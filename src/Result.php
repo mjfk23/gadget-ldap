@@ -28,20 +28,32 @@ class Result implements \IteratorAggregate
         private array $attributes,
         private \LDAP\Result $result
     ) {
-        ldap_parse_result(
+        $success = ldap_parse_result(
             ldap: $this->conn->getConnection(),
             result: $result,
-            error_code: $this->errorCode,
-            matched_dn: $this->matchedDN,
-            error_message: $this->errorMessage,
-            referrals: $this->referrals,
+            error_code: $errorCode,
+            matched_dn: $matchedDN,
+            error_message: $errorMessage,
+            referrals: $referrals,
             controls: $controls
         );
+        if (!$success) {
+            throw new LdapException("");
+        }
 
-        /** @var string[][][] $controls */
-        $cookie = $controls[Constants::LDAP_CONTROL_PAGEDRESULTS]['value']['cookie'] ?? null;
-        $this->cookie = is_string($cookie) ? $cookie : '';
+        /** @var int $errorCode */
+        $this->errorCode = $errorCode;
+        /** @var string $matchedDN */
+        $this->matchedDN = $matchedDN;
+        /** @var string $errorMessage */
+        $this->errorMessage = $errorMessage;
+        /** @var mixed[] $referrals */
+        $this->referrals = $referrals;
+        /** @var mixed[][][] $controls */
         $this->controls = $controls;
+
+        $cookie = $controls[LdapOptions::CONTROL_PAGEDRESULTS]['value']['cookie'] ?? '';
+        $this->cookie = is_string($cookie) ? $cookie : '';
     }
 
 
@@ -88,7 +100,7 @@ class Result implements \IteratorAggregate
      */
     protected function getEntryValues(\LDAP\ResultEntry $entry): array
     {
-        /** @var array<scalar|scalar[]> $attributes */
+        /** @var array<(int|string)[]|int|string> $attributes */
         $attributes = ldap_get_attributes(
             $this->conn->getConnection(),
             $entry

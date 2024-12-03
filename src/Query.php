@@ -58,8 +58,8 @@ class Query
             filter: is_array($this->filter) ? implode('', $this->filter) : $this->filter,
             attributes: $this->attributes,
             controls: [
-                Constants::LDAP_CONTROL_PAGEDRESULTS => [
-                    'oid' => Constants::LDAP_CONTROL_PAGEDRESULTS,
+                LdapOptions::CONTROL_PAGEDRESULTS => [
+                    'oid' => LdapOptions::CONTROL_PAGEDRESULTS,
                     'iscritical' => true,
                     'value' => [
                         'cookie' => $cookie,

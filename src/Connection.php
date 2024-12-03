@@ -23,11 +23,11 @@ class Connection
         private string $pass = '',
         private \LDAP\Connection|null $conn = null,
         private array $globalOptions = [
-            // Constants::LDAP_OPT_DEBUG_LEVEL => 7
+            // LdapOptions::DEBUG_LEVEL => 7
         ],
         private array $connectOptions = [
-            Constants::LDAP_OPT_PROTOCOL_VERSION => 3,
-            Constants::LDAP_OPT_REFERRALS => 0
+            LdapOptions::PROTOCOL_VERSION => 3,
+            LdapOptions::REFERRALS => 0
         ]
     ) {
     }
@@ -97,29 +97,29 @@ class Connection
     {
         foreach ($this->globalOptions as $option => $value) {
             if (ldap_set_option(null, $option, $value) !== true) {
-                throw new LdapException(["ldap_set_option() failed: %s", JSON::encode([
+                throw new LdapException(["ldap_set_option() failed: %s", [JSON::encode([
                     'ldap' => null,
                     'option' => $option,
                     'value' => $value
-                ])]);
+                ])]]);
             }
         }
 
         $conn = ldap_connect($this->uri);
         if (!$conn instanceof \LDAP\Connection) {
-            throw new LdapException(["ldap_connect() failed: \$uri => : %s", JSON::encode([
+            throw new LdapException(["ldap_connect() failed: \$uri => : %s", [JSON::encode([
                 'uri' => $this->uri
-            ])]);
+            ])]]);
         }
 
         foreach ($this->connectOptions as $option => $value) {
             if (ldap_set_option($conn, $option, $value) !== true) {
                 if (ldap_set_option(null, $option, $value) !== true) {
-                    throw new LdapException(["ldap_set_option() failed: %s", JSON::encode([
+                    throw new LdapException(["ldap_set_option() failed: %s", [JSON::encode([
                         'ldap' => 'resource',
                         'option' => $option,
                         'value' => $value
-                    ])]);
+                    ])]]);
                 }
             }
         }
@@ -129,10 +129,10 @@ class Connection
         }
 
         if (ldap_bind($conn, $this->user, $this->pass) === false) {
-            throw new LdapException(["ldap_bind() failed: %s", JSON::encode([
+            throw new LdapException(["ldap_bind() failed: %s", [JSON::encode([
                 'ldap' => 'resource',
                 'user' => $this->user
-            ])]);
+            ])]]);
         }
 
         return $conn;

@@ -6,6 +6,16 @@ namespace Gadget\Ldap;
 
 final class DateFormat
 {
+    /** @var int */
+    public const UTC_TIMESTAMP_START = 19700101000000;
+
+    /** @var int */
+    public const UTC_TIMESTAMP_END = 20991231235959;
+
+    /** @var int */
+    public const TIME_INTERVAL_OFFSET = 11644473600;
+
+
     /**
      * @param int $utcTimestamp
      * @param non-empty-string|null $localTimezone
@@ -15,8 +25,8 @@ final class DateFormat
         int $utcTimestamp,
         string|null $localTimezone = null
     ): \DateTimeInterface {
-        if ($utcTimestamp < 19700101000000 || $utcTimestamp > 20991231235959) {
-            throw new LdapException("Invalid timestamp");
+        if ($utcTimestamp < self::UTC_TIMESTAMP_START || $utcTimestamp > self::UTC_TIMESTAMP_END) {
+            throw new LdapException(["Invalid timestamp: %d", [$utcTimestamp]]);
         }
 
         $year = intval(floor($utcTimestamp / 10000000000));
@@ -26,8 +36,16 @@ final class DateFormat
         $minute = intval(floor($utcTimestamp / 100) % 100);
         $second = $utcTimestamp % 100;
 
-        if ($month < 1 || $month > 12 || $day < 1 || $day > 31 || $hour > 23 || $minute > 59 || $second > 59) {
-            throw new LdapException("Invalid timestamp");
+        list($label, $value) = match (true) {
+            $month < 1 || $month > 12 => [", month %d", $month],
+            $day < 1 || $day > 31 => [", day %d", $day],
+            $hour > 23 => [", hour %d", $hour],
+            $minute > 59 => [", minute %d", $minute],
+            $second > 59 => [", second %d", $second],
+            default => [null, null]
+        };
+        if ($label !== null && $value !== null) {
+            throw new LdapException(["Invalid timestamp: %d{$label}", [$utcTimestamp, $value]]);
         }
 
         return static::createLocalDateTime(
@@ -54,11 +72,11 @@ final class DateFormat
         int $timeInterval,
         string|null $localTimezone = null
     ): \DateTimeInterface|null {
-        return $timeInterval > 116444736000000000
+        return $timeInterval > (10000000 * self::TIME_INTERVAL_OFFSET)
             ? self::createLocalDateTime(
                 date(
                     'Y-m-d H:i:s',
-                    intval(floor($timeInterval / 10000000)) - 11644473600
+                    intval(floor($timeInterval / 10000000)) - self::TIME_INTERVAL_OFFSET
                 ),
                 $localTimezone
             )
